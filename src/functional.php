@@ -1,24 +1,21 @@
 <?php
 //namespace f;
-function curryl($callable)
+
+/*
+ * php 5.6
+function curry($func,$n, ...$args)
 {
-    $outerArguments = func_get_args();
-    array_shift($outerArguments);
- 
-    return function() use ($callable, $outerArguments) {
-        return call_user_func_array($callable, array_merge($outerArguments, func_get_args()));
-    };
+	if($n == count($args)) {
+		return $func(...$args);
+	} else {
+		return function (...$a) use ($func, $args)
+		{
+			return $func(...$args,...$a);
+		}
+	}
 }
- 
-function curryr($callable)
-{
-    $outerArguments = func_get_args();
-    array_shift($outerArguments);
- 
-    return function() use ($callable, $outerArguments) {
-        return call_user_func_array($callable, array_merge(func_get_args(), $outerArguments));
-    };
-}
+ */
+
 function curry3($func, $args)
 {
 	$n = count($args);
@@ -78,9 +75,24 @@ function foldr()
 function map()
 {
 	return curry2(
-		function($x,$y) {return array_map($x,$y);}, 
+		function($x,$y) {
+			return array_map($x,$y);
+		}, 
 		func_get_args());
 }
+function map2()
+{
+	return curry2(
+		function($x,$y) {
+			$ret = [];
+			foreach($y as $a) {
+				$ret[] = $x($a);
+			}
+			return $ret;
+		}, 
+		func_get_args());
+}
+
 
 
 
