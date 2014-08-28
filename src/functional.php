@@ -80,37 +80,7 @@ function map()
 		}, 
 		func_get_args());
 }
-function map2()
-{
-	return curry2(
-		function($x,$y) {
-			$ret = [];
-			foreach($y as $a) {
-				$ret[] = $x($a);
-			}
-			return $ret;
-		}, 
-		func_get_args());
-}
 
-
-
-
-
-/*
-//reverse :: [a] -> [a]
-function reverse($x)
-{
-	return array_reverse($x);
-}
-*/
-
-//concat :: [[a]] -> [a]
-//accepts a list of lists and concatenates them
-function concat($x)
-{
-	return foldr(merge(), [],$x);
-}
 
 //(++) :: [a] -> [a] -> [a]
 function merge()
@@ -122,9 +92,11 @@ function merge()
 		func_get_args()
 	);
 }
-
-function edot()
+//concat :: [[a]] -> [a]
+//accepts a list of lists and concatenates them
+function concat($x)
 {
+	return foldr(merge(), [],$x);
 }
 
 function dot()
@@ -138,15 +110,37 @@ function dot()
 	
 
 }
+// OPERATIONS ON BASIC TYPES
 function test($x)
 {
 	return $x*2;
 }
+
 function plus()
 {
 	return curry2(
 		function ($x,$y) {
 			return $x + $y;
+		},
+		func_get_args()
+	);
+}
+
+function prepend()
+{
+	return curry2(
+		function ($x,$y) {
+			return $x . $y;
+		},
+		func_get_args()
+	);
+}
+
+function append()
+{
+	return curry2(
+		function ($x,$y) {
+			return $y . $x;
 		},
 		func_get_args()
 	);
@@ -161,6 +155,7 @@ function id()
 	);
 
 }
+// OBJECT OPERATIONS
 function attr()
 {
 	return curry2(
@@ -190,6 +185,7 @@ function methodArgs()
 		func_get_args()
 	);
 }
+// LOGIC OPERATION
 function l_and()
 {
 	return curry2(
@@ -227,6 +223,7 @@ function f_or()
 		func_get_args()
 	);
 }
+
 function all()
 {
 	return curry2(
