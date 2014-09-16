@@ -145,6 +145,27 @@ function append()
 		func_get_args()
 	);
 }
+
+function startsWith()
+{
+	return curry2(
+        function ($needle,$haystack) {
+            return (substr($haystack, 0, strlen($needle)) === $needle);
+		},
+		func_get_args()
+	);
+}
+
+function endsWith()
+{
+	return curry2(
+        function ($needle,$haystack) {
+            return substr($haystack, -strlen($needle))===$needle;
+		},
+		func_get_args()
+	);
+}
+
 function id()
 {
 	return curry1(
@@ -242,3 +263,5 @@ function any()
 		func_get_args()
 	);
 }
+
+
