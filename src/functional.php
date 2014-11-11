@@ -165,6 +165,15 @@ function endsWith()
 		func_get_args()
 	);
 }
+function contains()
+{
+	return curry2(
+        function ($needle,$haystack) {
+            return subpos($haystack, $needle) !== false;
+		},
+		func_get_args()
+	);
+}
 
 function id()
 {
