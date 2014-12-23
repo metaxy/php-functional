@@ -169,7 +169,7 @@ function contains()
 {
 	return curry2(
         function ($needle,$haystack) {
-            return subpos($haystack, $needle) !== false;
+            return strpos($haystack, $needle) !== false;
 		},
 		func_get_args()
 	);
