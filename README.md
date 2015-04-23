@@ -10,5 +10,5 @@ f = mult2 5
 ```
 ```php
 $mult2 = map(function($x){return $x*2});
-$f = $mult2(4);
+$f = $mult2(5);
 ```
