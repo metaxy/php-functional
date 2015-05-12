@@ -323,11 +323,20 @@ function f_is_int()
     );
 }
 
-function all_are()
+function all_keys_are()
 {
     return curry2(
         function($p, $list) {
-            return is_array($list) && dot(f_and(), map($p), $list);
+            return is_array($list) && dot(f_and(), map($p), array_keys($list));
+        },
+        func_get_args()
+    );
+}
+function all_values_are()
+{
+    return curry2(
+        function($p, $list) {
+            return is_array($list) && dot(f_and(), map($p), array_values($list));
         },
         func_get_args()
     );
