@@ -66,7 +66,7 @@ function curry1($func, $args)
 function foldr()
 {
 	return curry3(
-		function($func,$init,$array) {return array_reduce($array,$func,$init);},
+		function($func, $init, $array) {return array_reduce($array, $func, $init);},
 		func_get_args()
 	);
 }
@@ -75,8 +75,8 @@ function foldr()
 function map()
 {
 	return curry2(
-		function($x,$y) {
-			return array_map($x,$y);
+		function($x, $y) {
+			return array_map($x, $y);
 		}, 
 		func_get_args());
 }
@@ -86,8 +86,8 @@ function map()
 function merge()
 {	
 	return curry2(
-		function ($x,$y) {
-			return array_merge($x,$y);
+		function ($x, $y) {
+			return array_merge($x, $y);
 		},
 		func_get_args()
 	);
@@ -96,7 +96,7 @@ function merge()
 //accepts a list of lists and concatenates them
 function concat($x)
 {
-	return foldr(merge(), [],$x);
+	return foldr(merge(), [], $x);
 }
 
 function dot()
@@ -257,7 +257,7 @@ function f_or()
 function all()
 {
 	return curry2(
-		function($p,$list) {
+		function($p, $list) {
 			return dot(f_and(), map($p), $list);
 		},
 		func_get_args()
@@ -273,4 +273,62 @@ function any()
 	);
 }
 
+function f_is_enum()
+{
+    return curry2(
+        function($enumClass, $value) {
+            return in_array($value, $enumClass::getValidValues());
+        },
+        func_get_args()
+    );
+}
 
+function f_is_string()
+{
+    return curry1(
+        function($value) {
+            return is_string($value);
+        },
+        func_get_args()
+    );
+}
+
+
+function f_is_array()
+{
+    return curry1(
+        function($value) {
+            return is_array($value);
+        },
+        func_get_args()
+    );
+}
+
+function f_is_bool()
+{
+    return curry1(
+        function($value) {
+            return is_bool($value);
+        },
+        func_get_args()
+    );
+}
+function f_is_int()
+{
+    return curry1(
+        function($value) {
+            return is_int($value);
+        },
+        func_get_args()
+    );
+}
+
+function all_are()
+{
+    return curry2(
+        function($p, $list) {
+            return is_array($list) && dot(f_and(), map($p), $list);
+        },
+        func_get_args()
+    );
+}
