@@ -2,7 +2,7 @@
     "name": "metaxy/php-functional",
     "description": "Functional primitives for PHP",
     "keywords": ["functional"],
-    "license": "LGPLv3",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Paul Walger",
